@@ -37,7 +37,9 @@ public class EmpController {
 		// 2) 클라이언트에 전달할 데이터 담기
 		model.addAttribute("emps", list);
 		// 3) 데이터를 출력할 페이지 결정		
-		return "emp/list";
+		return "emp/list"; // return /로 시작하면 안됨
+		// prefix + return + suffix => 실제 경로 / ViewResolver
+		// classpath:/templates/emp/list.html
 	}
 	
 	// 단건조회 : Get => QueryString(커맨드 객체 or @RequestParam)
@@ -47,6 +49,7 @@ public class EmpController {
 		model.addAttribute("emp", findVO);
 		// HttpServletRequest.setAttribute();
 		return "emp/info";
+		// classpath:/templates/emp/info.html
 	}
 	
 	// 등록 - 페이지 : Get
@@ -75,7 +78,7 @@ public class EmpController {
 	}
 	
 	// 수정 - 페이지 : Get, 조건이 필요 <=> 단건조회
-	@GetMapping("empUpdate")
+	@GetMapping("empUpdate") // empUpdate?employeeId=value
 	public String empUpdate(EmpVO empVO, Model model) {
 		EmpVO findVO = empService.empInfo(empVO);
 		model.addAttribute("emp", findVO);
@@ -84,14 +87,14 @@ public class EmpController {
 	}
 	
 	// 수정 - 처리 : Post, AJAX => QueryString
-	@PostMapping("empUpdate")
+	//@PostMapping("empUpdate")
 	@ResponseBody // AJAX
 	public Map<String, Object> empUpdateAJAXQueryString(EmpVO empVO) {
 		return empService.empUpdate(empVO);
 	}
 	
 	// 수정 - 처리 : AJAX => JSON (@RequestBody)
-	//@PostMapping("empUpdate")
+	@PostMapping("empUpdate")
 	@ResponseBody // AJAX
 	public Map<String, Object> empUpdateAJAXJSON(@RequestBody EmpVO empVO) {
 		return empService.empUpdate(empVO);

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>empUpdate</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<form name="updateForm" th:object="${emp}">
+		<h3>사원 정보 수정</h3>
+		<div>
+			<label for="employeeId">사원번호</label>
+			<input type="number" th:field="*{employeeId}" readonly>
+		</div>		
+		<div>
+			<label for="lastName">이름</label>
+			<input type="text" th:field="*{lastName}">
+		</div>
+		<div>
+			<label for="email">이메일</label>
+			<input type="email" th:field="*{email}">
+		</div>
+		<div>
+			<label for="hireDate">입사일자</label>
+			<input type="date" th:field="*{hireDate}">
+		</div>
+		<div>
+			<label for="jobId">업무</label>
+			<input type="text" th:field="*{jobId}">
+		</div>
+		<div>
+			<label for="salary">급여</label>
+			<input type="number" step="0.01" min="1" th:field="*{salary}">
+		</div>
+		<div>
+			<button type="button" id="updateBtn">저장</button>
+		</div>
+	</form>
+	<script>
+		$('#updateBtn').on('click', updateAjax);
+		
+		function updateAjax(event) {
+			// 1) 보낼 데이터 가져오기
+			let dataObj = getFormData();
+			// 2) AJAX
+			$.ajax("empUpdate", {
+				type : 'post', // Method
+				// data : dataObj // 객체 => QueryString
+				// JSON : @RequestBody
+				contentType : 'application/json',
+				data : JSON.stringify(dataObj) // JavaScript 값이나 객체를 JSON 문자열로 변환
+			})
+			.done((data)=>{
+				console.log(data);
+				if(data.result) {
+					alert('성공적으로 수정되었습니다.');					
+				}
+				else {
+					alert('수정되지 않았습니다.');
+				}
+			})
+			.fail((err)=>console.log(err));
+		}
+		
+		function getFormData() {
+			let formAry = $('form[name="updateForm"]').serializeArray();
+			/*
+				[{name : "employeeId", value : "100"},
+				{name : "lastName", value : "King"},
+				...]
+			*/
+			
+			// { "employeeId" : 100, "lastName" : "King", ... }
+			let formObj = {};
+			$.each(formAry, function(idx, tag) {
+				// tag) {name : "employeeId", value : "100"}
+				formObj[tag.name] = tag.value; // formObj[tag["name"]]
+				// formObj["employeeId"] = "100";
+			});
+			
+			return formObj;
+		}
+	</script>
+</body>
+</html>

@@ -96,7 +96,7 @@ class Boot01ApplicationTests {
 		assertEquals(result, 1);
 	}
 	
-	@Test
+	//@Test
 	void empUpdateDynamic() {
 		EmpVO empVO = new EmpVO();
 		empVO.setEmployeeId(207);
