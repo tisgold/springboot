@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>deptInfo</title>
+</head>
+<body>
+	<div>
+		<h3>부서 정보 조회</h3>
+		<div>
+			<label for="deptId">부서번호</label>
+			<input type="number" id="deptId" th:value="${dept.departmentId}" readonly>
+		</div>
+		<div>
+			<label for="deptName">부서이름</label>
+			<input type="text" id="deptName" th:value="${dept.departmentName}" readonly>
+		</div>
+		<div>
+			<label for="mgrId">부서책임자 사원번호</label>
+			<input type="number" id="mgrId" th:value="${dept.managerId}" readonly>
+		</div>
+		<div>
+			<label for="locId">위치번호</label>
+			<input type="number" id="locId" th:value="${dept.locationId}" readonly>
+		</div>
+		<div>
+			<button type="button" th:onclick="|location.href='@{/deptUpdate(departmentId=${dept.departmentId})}'|">수정</button>
+			<button type="button" th:onclick="|location.href='@{/deptList}'|">목록</button>
+			<button type="button" th:onclick="|location.href='@{/deptDelete(departmentId=${dept.departmentId})}'|">삭제</button>
+		</div>
+	</div>
+</body>
+</html>
