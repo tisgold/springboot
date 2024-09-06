@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>empInsert</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
 <body>
+  <div class="d-flex justify-content-center">
 	<form th:action="@{/empInsert}" method="post">
 		<h3>사원 추가</h3>		
 		<div>
@@ -31,5 +31,6 @@
 			<button type="submit">저장</button>
 		</div>
 	</form>
+  </div>
 </body>
 </html>
