@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>deptInsert</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/dept_layout}"
+      layout:fragment="Content">
 <body>
+	<div class="d-flex justify-content-center">
 	<form th:action="@{/deptInsert}" method="post">
-		<h3>부서 추가</h3>		
+		<h3>부서 등록</h3>		
 		<div>
 			<label for="deptName">부서이름</label>
 			<input type="text" id="deptName" name="departmentName" required>
@@ -23,5 +23,6 @@
 			<button type="submit">저장</button>
 		</div>
 	</form>
+	</div>
 </body>
 </html>

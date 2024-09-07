@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>deptUpdate</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/dept_layout}"
+      layout:fragment="Content">
 <body>
+	<div class="d-flex justify-content-center">
 	<form name="updateForm" th:object="${dept}">
 		<h3>부서 정보 수정</h3>
 		<div>
@@ -28,6 +27,7 @@
 			<button type="button" id="updateBtn">저장</button>
 		</div>
 	</form>
+	</div>
 	<script>
 		$('#updateBtn').on('click', updateAjax);
 		

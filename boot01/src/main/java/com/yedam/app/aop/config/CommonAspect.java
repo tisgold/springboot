@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Aspect // AOP의 설정
 @Component // Bean 등록
-@Slf4j // lombok
+@Slf4j // lombok log
 public class CommonAspect {
 	// Pointcut : Joinpoint(@Service의 메소드들) 중에서 Advice(횡단관심, 부가기능)이 적용될 메소드 조건
 	@Pointcut("within(com.yedam.app.emp.service.impl.*)")

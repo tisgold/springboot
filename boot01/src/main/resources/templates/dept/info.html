@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>deptInfo</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/dept_layout}"
+      layout:fragment="Content">
 <body>
+	<div class="d-flex justify-content-center">
 	<div>
 		<h3>부서 정보 조회</h3>
 		<div>
@@ -28,6 +28,7 @@
 			<button type="button" th:onclick="|location.href='@{/deptList}'|">목록</button>
 			<button type="button" th:onclick="|location.href='@{/deptDelete(departmentId=${dept.departmentId})}'|">삭제</button>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

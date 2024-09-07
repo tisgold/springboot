@@ -4,6 +4,7 @@
       layout:decorate="~{common/layouts/default_layout}"
       layout:fragment="Content">
 <body>
+  	<div class="d-flex justify-content-center">
 	<form name="updateForm" th:object="${emp}">
 		<h3>사원 정보 수정</h3>
 		<div>
@@ -34,6 +35,7 @@
 			<button type="button" id="updateBtn">저장</button>
 		</div>
 	</form>
+    </div>
 	<script>
 		$('#updateBtn').on('click', updateAjax);
 		
