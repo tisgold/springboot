@@ -34,9 +34,10 @@ public class Uploadcontroller {
 	} 
 	// classpath:/templates/formUpload.html
 	
-	// Content-Type : 'multipart/form-data' -> 통신용 인코딩을 안함
-	// => MultipartResolver : Spring Boot -> AutoConfig
-	// => StandardServletMultipartResolver : Bean
+	/* Content-Type : 'multipart/form-data' -> 통신용 인코딩을 안함
+	   => MultipartResolver : Spring Boot -> AutoConfig
+	   => StandardServletMultipartResolver : Bean
+	*/
 	// @RequestPart MultipartFile : 임시로 첨부된 파일을 담음
 	@PostMapping("uploadForm")
 	public String formUploadFile(@RequestPart MultipartFile[] files) { // <input multiple>
@@ -67,8 +68,7 @@ public class Uploadcontroller {
 	
 	@PostMapping("/uploadsAjax")
 	@ResponseBody
-	public List<String> uploadFile
-			(@RequestPart MultipartFile[] uploadFiles) {
+	public List<String> uploadFile(@RequestPart MultipartFile[] uploadFiles) {
 	    
 		List<String> imageList = new ArrayList<>();
 		
@@ -88,7 +88,7 @@ public class Uploadcontroller {
 	        String uuid = UUID.randomUUID().toString();
 	        //저장할 파일 이름 중간에 "_"를 이용하여 구분
 	        
-	        String uploadFileName = folderPath +File.separator + uuid + "_" + fileName;
+	        String uploadFileName = folderPath + File.separator + uuid + "_" + fileName;
 	        
 	        String saveName = uploadPath + File.separator + uploadFileName;
 	        

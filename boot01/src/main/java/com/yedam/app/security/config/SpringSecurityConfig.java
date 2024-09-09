@@ -23,10 +23,10 @@ public class SpringSecurityConfig {
 	InMemoryUserDetailsManager inMemoryUserDetailsService() {
 		// UserDetails : Spring Security가 사용하는 VO의 형태
 		UserDetails user = User.builder().username("user1")
-				                         .password(passwordEncoder().encode("1234"))
-				                         .roles("USER") // ROLE_USER, 앞에 ROLE_가 붙음
-				                       //.authorities("ROLE_USER")
-				                         .build();
+				.password(passwordEncoder().encode("1234"))
+				.roles("USER") // ROLE_USER, 앞에 ROLE_가 붙음
+			  //.authorities("ROLE_USER")
+				.build();
 		UserDetails admin = User.builder().username("admin1")
                 .password(passwordEncoder().encode("1234"))
               //.roles("ADMIN") // ROLE_ADMIN, 앞에 ROLE_가 붙음
