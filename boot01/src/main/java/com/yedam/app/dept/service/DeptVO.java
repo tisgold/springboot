@@ -8,5 +8,5 @@ public class DeptVO {
 	private String departmentName;	// 부서명, NOT NULL
 	private Integer managerId;		// 부서책임자의 사원번호, FK
 	private Integer locationId;		// 위치번호, FK
-	private String city;            // 도시, NOT NULL
+	private String city;            // locations 테이블의 도시, NOT NULL
 }
