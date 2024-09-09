@@ -41,7 +41,7 @@ public class SpringSecurityConfig {
 		// 적용될 Security 설정 => URI에 적용될 권한
 		http.authorizeHttpRequests(authrize
 			-> authrize.requestMatchers("/", "/all").permitAll()
-					   .requestMatchers("/user/**").hasRole("USER")
+					   .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 					   .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 					   .anyRequest().authenticated()
 		).formLogin(formLogin -> formLogin.defaultSuccessUrl("/all"))
