@@ -49,6 +49,11 @@
 				// JSON : @RequestBody
 				contentType : 'application/json',
 				data : JSON.stringify(dataObj) // JavaScript 값이나 객체를 JSON 문자열로 변환
+				/*
+				,beforeSend: function(xhr) { // Header 수정
+					xhr.setRequestHeader(csrfHeader, csrfToken);					
+				}
+				*/
 			})
 			.done((data)=>{
 				console.log(data);

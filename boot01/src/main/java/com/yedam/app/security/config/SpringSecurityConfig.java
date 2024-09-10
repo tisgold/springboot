@@ -4,11 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
@@ -18,7 +15,7 @@ public class SpringSecurityConfig {
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(); // Security가 담당하는 모든 password를 처리
 	}
-	
+	/*
 	@Bean // 메모리상 인증정보 등록 => 테스트 전용
 	InMemoryUserDetailsManager inMemoryUserDetailsService() {
 		// UserDetails : Spring Security가 사용하는 VO의 형태
@@ -30,10 +27,11 @@ public class SpringSecurityConfig {
 		UserDetails admin = User.builder().username("admin1")
                 .password(passwordEncoder().encode("1234"))
               //.roles("ADMIN") // ROLE_ADMIN, 앞에 ROLE_가 붙음
-                .authorities("ROLE_ADMIN")
+                .authorities("ROLE_ADMIN") // .authorities("ROLE_ADMIN", "ROLE_USER")
                 .build();
 		return new InMemoryUserDetailsManager(user, admin);
 	}
+	*/
 	
 	// 인증 및 인가
 	@Bean
@@ -43,9 +41,12 @@ public class SpringSecurityConfig {
 			-> authrize.requestMatchers("/", "/all").permitAll()
 					   .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 					   .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-					   .anyRequest().authenticated()
+					   .anyRequest().authenticated() // 나머지 경로에 인증받은 계정은 접속 허가
 		).formLogin(formLogin -> formLogin.defaultSuccessUrl("/all"))
-		 .logout(logout -> logout.logoutSuccessUrl("/all"));
+		 .logout(logout -> logout.logoutSuccessUrl("/all")
+				 				 .invalidateHttpSession(true)); // 현재 세션 종료
+		
+		http.csrf(csrf -> csrf.disable()); // csrf 무력화
 		
 		return http.build();
 	}
